@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
   // Gunakan variabel environment di Vercel, jika tidak ada fallback ke localhost
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:10000/api',
+  baseURL: import.meta.env.VITE_API_URL || 'https://predictsnbt-backend.onrender.com/api',
   headers: { 'Content-Type': 'application/json' },
 });
 
