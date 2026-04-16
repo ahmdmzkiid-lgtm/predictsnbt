@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  USER
+}
+
+enum Category {
+  SAINTEK
+  SOSHUM
+  CAMPURAN
+}
+
+model User {
+  id           Int        @id @default(autoincrement())
+  name         String
+  email        String     @unique
+  passwordHash String     @map("password_hash")
+  role         Role       @default(USER)
+  createdAt    DateTime   @default(now()) @map("created_at")
+  bookmarks    Bookmark[]
+
+  @@map("users")
+}
+
+model University {
+  id       Int     @id @default(autoincrement())
+  name     String
+  city     String
+  province String
+  majors   Major[]
+
+  @@map("universities")
+}
+
+model Major {
+  id            Int        @id @default(autoincrement())
+  universityId  Int        @map("university_id")
+  name          String
+  category      Category   @default(SAINTEK)
+  accreditation String     @default("B")
+  degree        String     @default("S1")
+  estimatedUkt  Int        @default(5000000) @map("estimated_ukt")
+  university    University @relation(fields: [universityId], references: [id], onDelete: Cascade)
+  statistics    Statistic[]
+  bookmarks     Bookmark[]
+
+  @@map("majors")
+}
+
+model Statistic {
+  id         Int   @id @default(autoincrement())
+  majorId    Int   @map("major_id")
+  year       Int
+  minScore   Float @map("min_score")
+  applicants Int
+  capacity   Int
+  tpsScore   Float @default(0) @map("tps_score")
+  litBiScore Float @default(0) @map("lit_bi_score")
+  litBingScore Float @default(0) @map("lit_bing_score")
+  pmScore    Float @default(0) @map("pm_score")
+  major      Major @relation(fields: [majorId], references: [id], onDelete: Cascade)
+
+  @@unique([majorId, year])
+  @@map("statistics")
+}
+
+model Bookmark {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  majorId   Int      @map("major_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  major     Major    @relation(fields: [majorId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, majorId])
+  @@map("bookmarks")
+}

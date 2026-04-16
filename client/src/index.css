@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Press+Start+2P&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-navy-900 text-gray-100 font-sans antialiased;
+    overflow-x: hidden;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-navy-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-navy-600 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-navy-500;
+  }
+}
+
+@layer components {
+  .pixel-grid {
+    background-image:
+      linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 bg-gradient-to-r from-cyan-glow to-cyan-accent text-navy-900 font-semibold rounded-lg
+    transition-all duration-300 hover:shadow-neon-strong hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 border border-cyan-glow/30 text-cyan-glow rounded-lg
+    transition-all duration-300 hover:bg-cyan-glow/10 hover:shadow-neon hover:border-cyan-glow/60;
+  }
+
+  .card {
+    @apply bg-navy-800/80 backdrop-blur-sm border border-navy-600/50 rounded-xl p-6
+    transition-all duration-300 hover:border-cyan-glow/30 hover:shadow-neon;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-navy-800 border border-navy-600/50 rounded-lg text-gray-100
+    placeholder-gray-500 focus:outline-none focus:border-cyan-glow/50 focus:shadow-neon
+    transition-all duration-300;
+  }
+
+  .badge-aman {
+    @apply px-3 py-1 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 rounded-full text-xs font-semibold;
+  }
+  .badge-menengah {
+    @apply px-3 py-1 bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 rounded-full text-xs font-semibold;
+  }
+  .badge-ambisius {
+    @apply px-3 py-1 bg-red-500/20 text-red-400 border border-red-500/30 rounded-full text-xs font-semibold;
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5), 0 0 20px rgba(0, 212, 255, 0.3);
+  }
+
+  .skeleton {
+    @apply bg-navy-700/50 rounded animate-pulse;
+  }
+}
