@@ -45,6 +45,6 @@ app.use('/api/admin', adminRoutes);
 // Global error handler
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on http://localhost:${PORT}`);
+app.listen(PORT,() => {
+  console.log(`🚀 Server running on port${PORT}`);
 });
