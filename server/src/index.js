@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 5000;
 // Konfigurasi CORS: Izinkan asal dinamis (untuk dev) atau domain tertentu (untuk prod)
 const allowedOrigins = [
   'http://localhost:5173',
+  'https://ahmdmzki.my.id',
   process.env.CLIENT_URL
 ].filter(Boolean);
 
